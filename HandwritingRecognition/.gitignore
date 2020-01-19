@@ -8,3 +8,5 @@
 *.aux
 *.bb
 *.xbb
+.DS_Store
+../.DS_Store
