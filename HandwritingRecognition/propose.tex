@@ -113,11 +113,15 @@ $y$座標に対しても同様の計算を行い，結果的に$(x, y)$をそれ
 
 $L_i$において$x_i$と$y_i$は直線の始点を表し，$\Delta{x_i}$と$\Delta{y_i}$は線の始点から終点までの$x$軸方向，$y$軸方向の距離を表す．また$I(s_i=s_{i+1})=1$は，直線の始点と終点が同一ストローク上にあることを示し，$I(s_i \neq s_{i+1})=1$はその直線で次のストロークに移ったことを示す．
 
+%========================================================================
 \section{データ拡張ブロック}
 \label{augment}
 様々な手書き文字に対応するため，本研究では多様な提供者から大量のデータを得る必要がある．しかし，十分なデータ量を確保するためには非常に多くの労力と時間を要する．そこで，はじめに先行研究のSRP（Stroke Rotation and Parallel-shift）手法を説明する．その後，文字の縦横比を変更する変更するRatio手法を提案する．これらの手法を用いてデータ拡張を行うことで，手書き文字データの多様性を高める．
 
-\subsection{ストロークの回転}
+\subsection{SRP手法}
+ここでは，先行研究のデータ拡張手法であるSRP（Stroke Rotation and Parallel-shift）手法について説明する．
+SRP手法とは，ストロークの回転と平行移動によってデータ量を水増しする手法である．
+\subsubsection{ストロークの回転}
 ストロークの始点と終点の座標から中点を求め，その点を中心にストローク上の点をそれぞれ回転させることでストローク全体を回転させる．この処理を１つのデータに対して複数回施すことで，データ拡張を行う．
 
 \textbf{図~\ref{rotate}(a)}にストロークの回転の原理を示す．ストロークの始点を$(x_f, y_f)$，終点を$(x_l, y_l)$とする．始点と終点の中点を$(a, b)$とすると，式~\ref{eq:center}より$(a, b)$の値が求められる．
@@ -149,7 +153,6 @@ $L_i$において$x_i$と$y_i$は直線の始点を表し，$\Delta{x_i}$と$\De
     \right)
   \label{eq:rotate}
 \end{equation}
-\\
 
 この式をストローク上のすべての点に用いることで，ストローク自体を角$\theta$回転させる．\textbf{図~\ref{rotate}(b)}にストローク回転前の単語データの例，\textbf{図~\ref{rotate}(c)}にストローク回転後の単語データの例を示す．この処理を，ストロークごとに角度を変えながら行うことで元のデータとは異なる形の文字・単語を生成する．それを1つの単語データに対して$N$回行い，データ量を$N$倍に拡張する．
 
@@ -177,7 +180,7 @@ $L_i$において$x_i$と$y_i$は直線の始点を表し，$\Delta{x_i}$と$\De
  \label{rotate}
 \end{figure}
 
-\subsection{ストロークの平行移動}
+\subsubsection{ストロークの平行移動}
 ストローク上の点の座標それぞれに一定の値を加え，ストローク全体を平行移動させることでデータ拡張を行う．\textbf{図~\ref{parallel}(a)}にストロークの平行移動の原理を示す．ストローク上の任意の点の座標を$(x, y)$としたとき，その点を$x$方向に$dx$，$y$方向に$dy$だけ平行移動させた後の座標$(X, Y)$は 式~\ref{eq:parallel}で表される．
 
 \begin{equation}
@@ -212,43 +215,55 @@ $L_i$において$x_i$と$y_i$は直線の始点を表し，$\Delta{x_i}$と$\De
 
 
 
+\subsection{Ratio手法}
+ここでは，オンライン文字におけるデータ拡張の新手法として，文字の縦横比を変更する変更するRatio手法を提案する．先行研究のSRP手法において回転の度合い，平行移動の度合いは筆者が文字のパラメーターを崩さないと判断できる範囲で設定している．そのため，データを100倍に拡張した場合，同じようなデータが増えてしまい学習精度が低くなる原因になる．Ratio手法では，SRP手法とは別の方法で拡張を行うため，SRP手法と組み合わせることによりSRP手法のみで拡張をする場合に比べ，よりデータの多様化を実現することができる．
 
-\subsection{文字の縦横比変更}
-（まだ全然かけてない，なんとなくで書いておこう）
-1つの単語における，すべての点のy座標（もしくはx座標）の平均値を取り，すべての点のy座標（もしくはx座標）に対し（ここになんか書くぞ）．\textbf{図}に文字の縦横比変更の原理を示す．
+\subsubsection{文字の縦横比変更}
+文字の縦横比変更は$x$座標を基準に行う場合と，$y$座標を基準に行う場合がある．
+ここでは$y$座標を基準に行う場合を具体的に説明する．
+1つの単語における，すべての点のy座標の平均値を取り，すべての点のy座標に対し平均値との大小関係の比較をする．比較結果に応じて，点の移動を行う．\textbf{図}に文字の縦横比変更の原理を示す．
 文字の拡張比率を$a$，1つの単語上のすべての点の$y$座標の平均を$\bar{y}$とし，同単語上の任意の点の座標を$(x, y)$としたとき，
-その点の$y$座標が$\bar{y}$より大きいときに$y$方向にーーーーーー移動させた後の座標$(X, Y)$は 式~\ref{eq:yratio}で表される．
+その点の$y$座標が$\bar{y}$より大きい場合，$y$座標に$y$座標の値の$a$倍を加算し，$\bar{y}$との距離が大きくなる方向に移動させた後の座標$(X, Y)$は 式~\ref{eq:yratio>}で表される．
 
 \begin{equation}
-  (X, Y) = (x×1, y×(1+a))
-  \label{eq:yratio}
+  (X, Y) = (x, y(1+a))
+  \label{eq:yratio>}
 \end{equation}
-この式を単語上のすべての点に用いることで，単語全体の点をーーーーーーに移動させる．
+
+一方，$y$座標が$\bar{y}$より小さい場合，$y$座標から$y$座標の値の$a$倍を減算し，$\bar{y}$との距離が大きくなる方向に移動させた後の座標$(X, Y)$は 式~\ref{eq:yratio<}で表される
+
+\begin{equation}
+  (X, Y) = (x, y(1-a))
+  \label{eq:yratio<}
+\end{equation}
+
+この式を単語上のすべての点に用いることで，単語全体の点を単語の$y$座標の平均を基準に移動させ，単語全体を$y$方向に引き伸ばす．
+$x$座標を基準に拡張する場合は，これらの式の$x$と$y$を逆にして計算を行う．
 
 
-．\textbf{図~\ref{yratio}(b)}にストローク平行移動前の単語データの例，\textbf{図~\ref{yratio}(c)}に文字の縦横比率変更後の単語データの例を示す．この処理を，拡張回数ごとに$a$と$x,y$どちらに適応するかをランダムに変えながら行うことで元のデータとは異なる形の文字・単語を生成する．それを1つの単語データに対して$N$回行い，データ量を$N$倍に拡張する．
+\textbf{図~\ref{yratio}(b)}に縦横比率変更前の単語データの例，\textbf{図~\ref{yratio}(c)}に文字の縦横比率を$y$座標を基準に変更後の単語データの例を示す．この処理を，拡張回数ごとに拡張比率$a$と，単語の$x,y$どちらを基準に適応するかをランダムに変えながら行うことで元のデータとは異なる形の文字・単語を生成する．それを1つの単語データに対して$N$回行い，データ量を$N$倍に拡張する．
 
 \begin{figure}[tb]
  \centering
   \begin{tabular}{c}
    \begin{minipage}[b]{0.7\hsize}
     \centering
-    %\includegraphics[keepaspectratio,scale=0.7]{img/parallel.eps}\\
-    (a)平行移動の原理
+    \includegraphics[keepaspectratio,scale=0.7]{img/yratio.eps}\\
+    (a)縦横比率変更の原理
    \end{minipage}\\
     \hfill
    \begin{minipage}[b]{0.5\hsize}
     \centering
-    %\includegraphics[keepaspectratio,scale=0.5]{img/ranitidCloseBlue.eps}\\
+    \includegraphics[keepaspectratio,scale=0.5]{img/ranitidCloseBlue.eps}\\
     (b)データ前処理後
    \end{minipage}
    \begin{minipage}[b]{0.5\hsize}
     \centering
-    %\includegraphics[keepaspectratio,scale=0.5]{img/parallel.eps}\\
-    (c)ー移動前（青）とー移動後（赤）
+    \includegraphics[keepaspectratio,scale=0.5]{img/ranitidRatioRedBlue.eps}\\
+    (c)縦横比率変更前（青）と変更後（赤）
    \end{minipage}
   \end{tabular}
- \caption{ストロークの平行移動}
+ \caption{文字の縦横比率変更}
  \label{yratio}
 \end{figure}
 
