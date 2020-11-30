@@ -1,0 +1,102 @@
+\documentclass[a4j,10pt,a4paper, fleqn]{jsarticle}\usepackage{stylefile}
+%
+%\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\graphicspath{{./fig/}}
+\usepackage{subfig}
+\usepackage{enumerate}
+\usepackage{cite}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{color}
+
+%不等号
+%\usepackage{ascmac}
+%\usepackage{eqnarray}
+%\usepackage{hangcaption}
+%
+%\setlength{\textwidth}{17cm}
+%\setlength{\topmargin}{-2cm}
+\setlength\floatsep{0pt}
+\setlength\textfloatsep{0pt}
+\setlength\intextsep{0pt}
+\setlength\abovecaptionskip{0pt}
+%副番号を用いる場合
+%\usepackage{subfigure}
+%
+\def\vector#1{\mbox{\boldmath $#1$}}
+\newcommand{\argmax}{\mathop{\rm arg~max}\limits}
+\newcommand{\argmin}{\mathop{\rm arg~min}\limits}
+\newcommand{\bhline}[1]{\noalign{\hrule height #1}}
+%\renewcommand{\baselinestretch}{0.997}
+\begin{document}
+%タイトル 2カラムぶち抜き
+\twocolumn[
+%titlepageは1ページ目のページ番号が出ないためカット
+%	\begin{titlepage}
+	\centerline{\LARGE Self-Admitted TechnicalDebtの削除}\par\vspace{1mm}
+	\centerline{\LARGE およびコンテナ仮想化技術の課題に関する調査}\par\vspace{1mm}
+	\centerline{\large 九州大学大学院　システム情報科学府}\par
+	\centerline{\large 情報知能工学専攻　亀井研究室}\par
+	\centerline{\large 修士1年　新堂 風}\par
+	\centerline{\large 令和2年12月14日(月) 16:40-17:25}\par\vspace{2mm}
+%	\end{titlepage}
+]
+%
+
+\input{./section/intro.tex}
+\input{./section/1.tex}
+\input{./section/2.tex}
+\input{./section/3.tex}
+\vspace{-1mm}
+\input{./section/summ.tex}
+
+\vspace{-2mm}
+\begin{thebibliography}{9}
+
+\vspace{-3mm}
+
+\bibitem{docker-satd}
+東英明, 柗本真佑, 亀井靖高 and 楠本真二, "コンテナ仮想化技術におけるSelf-Admitted Technical Debtの調査" 電子情報通信学会技術研究報告, 202o, pp. 25-30.
+
+\bibitem{satd-removal}
+E.D.S.Maldonado, R.Abdalkareem, E.Shihab and A.Serebrenik, "An Empirical Study on the Removal of Self-Admitted Technical Debt," 2017 IEEE International Conference on Software Maintenance and Evolution (ICSME), Shanghai, 2017, pp. 238-248, doi: 10.1109/ICSME.2017.8.
+
+\bibitem{satd-real-removal}
+F. Zampetti, A. Serebrenik and M. Di Penta, "Was Self-Admitted Technical Debt Removal a Real Removal? An In-Depth Perspective," 2018 IEEE/ACM 15th International Conference on Mining Software Repositories (MSR), Gothenburg, 2018, pp. 526-536.
+
+\bibitem{docker-failures}
+Yiwen Wu, Yang Zhang, Tao Wang, and Huaimin Wang. 2020. An Empirical Study of Build Failures in the Docker Context. In Proceedings of the 17th International Conference on Mining Software Repositories (MSR '20). Association for Computing Machinery, New York, NY, USA, 76–80. DOI:https://doi.org/10.1145/3379597.3387483
+
+
+\bibitem{1-ref-25}
+E.Maldonado, E.Shihab, and N.Tsantalis. Using natural language processing to automatically detect self-admitted technical debt. IEEE Transactions on Software Engineering, page to appear, 2017.
+
+% \bibitem{1-ref-29}
+% A.Potdar and E.Shihab. An exploratory study on self-admitted technical debt. In International Conference on Software Maintenance and Evolution, pages 91–100. IEEE Computer Society, 2014.
+
+% \bibitem{1-ref-37}
+% T.Punter, M.Ciolkowski, B.Freimut, and I.John. Conducting online surveys in software engineering. In International Symposium on Empirical Software Engineering., pages 80–88. IEEE, 2003.
+
+% \bibitem{3-ref-5}
+% Noam Rabbani, Michael S Harvey, Sadnan Saquif, Keheliya Gallaba, and Shane McIntosh. 2018. Revisiting" Programmers’ Build Errors" in the Visual Studio Context. In 2018 IEEE/ACM 15th International Conference on Mining Software Repositories (MSR). IEEE, 98–101
+
+% \bibitem{3-ref-12}
+% Yang Zhang, Bogdan Vasilescu, Huaimin Wang, and Vladimir Filkov. 2018. One size does not fit all: an empirical study of containerized continuous deployment workflows. In Proceedings of the 2018 26th ACMJoint Meeting on European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE). ACM, 295–306.
+
+
+
+\end{thebibliography}
+\vspace{-5mm}
+
+\begin{list}{}{\labelwidth=18mm \itemindent=8mm}
+	\renewcommand{\makelabel}{\normalsize}
+	\item[\quad 講演者\hfill]: 新堂　風 
+	\item[\quad 指導教員\hfill]: 亀井 靖高 准教授
+	\item[\quad 講演日時\hfill]: 2020年12月14日（月）16:40～17:25
+	\item[\quad 講演場所\hfill]: Teams
+\end{list}
+
+\end{document}
