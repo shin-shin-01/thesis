@@ -1,6 +1,6 @@
 \section{Dockerにおけるビルドの失敗に関する調査\cite{docker-failures}}
 \subsection{概要}
-Dockerは近年，コンテナ型仮想化技術の世界標準として注目を浴びている．しかし，Dockerのビルドは頻繁に失敗し，その修正には長い時間を要することが度々ある．これまでの研究では，大規模開発でのDockerのビルド失敗率について調査した研究はあったが，失敗の頻度とその修正に関する調査を行った研究はほとんど存在していなかった．文献\cite{docker-failures}では，Githubにリンクされた3,828件のオープンソースプロジェクトの857,086件のDockerのビルドについて調査している．Dockerのビルドデータを用いて，以下の3つのRQについて調査を行っている．
+Dockerは近年，コンテナ型仮想化技術の世界標準として注目を浴びている．しかし，Dockerのビルドは頻繁に失敗し，その修正には長い時間を要することが度々ある．これまでの研究では，大規模開発でのDockerのビルド失敗率について調査した研究はあったが，失敗の頻度とその修正に関する調査を行った研究はほとんど存在していなかった．文献\cite{docker-failures}では，GitHubにリンクされた3,828件のオープンソースプロジェクトの857,086件のDockerのビルドについて調査している．Dockerのビルドデータを用いて，以下の3つのRQについて調査を行っている．
 
 \begin{itemize}
   \item RQ 1: Dockerのビルドはどれくらいの頻度で失敗するか？
@@ -12,12 +12,12 @@ Dockerは近年，コンテナ型仮想化技術の世界標準として注目�
 % その結果，
 
 \subsection{データ収集}
-ここではデータの収集について説明する．文献\cite{docker-failures}では，公開されているDockerプロジェクトのビルドデータを取得するため，DockerHub APIで ``is\_autoomated"という文字列の有無をチェックして公開されているプロジェクトの特定を行っている．特定したプロジェクトからビルド数が10以下のプロジェクトをフィルタリングして，最終的に3,828件のプロジェクトのデータセット，857,086件のDockerビルドデータ（メタデータを含む）を取得している．表\ref{fig:3_docker-build-data}に各プロジェクトにおけるビルド数の統計値を示す．
+ここではデータの収集について説明する．文献\cite{docker-failures}では，公開されているDockerプロジェクトのビルドデータを取得するため，DockerHub APIで ``is\_automated"という文字列の有無をチェックして公開されているプロジェクトの特定を行っている．特定したプロジェクトからビルド数が10以下のプロジェクトをフィルタリングして，最終的に3,828件のプロジェクトのデータセット，857,086件のDockerビルドデータ（メタデータを含む）を取得している．表\ref{fig:3_docker-build-data}に各プロジェクトにおけるビルド数の統計値を示す．
 
 
 \begin{table}[t]
     \centering
-    \caption{各プロジェクトにおけるビルド数の基本統計}
+    \caption{各プロジェクトにおけるビルド数の基本統計 (出典：文献\cite{docker-failures})}
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis3/docker-build-data3.pdf}
     \label{fig:3_docker-build-data}
 \end{table}
@@ -27,21 +27,21 @@ Dockerは近年，コンテナ型仮想化技術の世界標準として注目�
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis3/docker-build-failuer-number3.pdf}
-    \caption{修正時間の分布}
+    \caption{修正時間の分布 (出典：文献\cite{docker-failures})}
     \label{fig:3_docker-build-failuer-number}
 \end{figure}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis3/docker-build-failuer-ratio-period3.pdf}
-    \caption{6ヶ月間のビルドの失敗率の分布}
+    \caption{6ヶ月間のビルドの失敗率の分布 (出典：文献\cite{docker-failures})}
     \label{fig:3_docker-build-failer-ratio-period}
 \end{figure}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis3/docker-build-fix-time-period3.pdf}
-    \caption{6ヶ月間の修正時間の分布}
+    \caption{6ヶ月間の修正時間の分布 (出典：文献\cite{docker-failures})}
     \label{fig:3_docker-build-fix-time-period}
 \end{figure}
 
@@ -71,12 +71,12 @@ RQ2についてビルドの修正時間にどれくらいの時間を要する�
 
 
 \subsection{結果}
-文献\cite{docker-failures}では，Docker環境におけるビルドの失敗事例について，大規模な実証実験を行っている．その結果，対象にした3,828件のプロジェクトにおいて，85.2\%のプロジェクトでビルドが発生しており，857,086件のビルドデータのうち17.8\%が失敗しているということが明らかになっている．また，31.5\%のプロジェクトにおいて，ビルドの20\%以上が失敗している．
+文献\cite{docker-failures}では，Docker環境におけるビルドの失敗事例について，大規模な実証実験を行っている．その結果，対象にした3,828件のプロジェクトにおいて，85.2\%のプロジェクトでビルドが発生しており，31.5\%のプロジェクトにおいて，ビルドの20\%以上が失敗していることが明らかになっている．
 % しかし，頻繁にビルドされているプロジェクトでは，ビルド失敗の割合は比較的低くなっている
-失敗したビルドの修正時間については，平均124.5分，中央値が44.2分であり，ビルドの失敗が頻繁に発生するプロジェクトでは，その修正時間が長いという結果も示されている．この結果は従来のビルドプロセスよりも長い時間になっている．
-文献\cite{docker-failures}では，Dockerのビルドは従来と異なりコードからパッケージング，テスト，クラウドへのデプロイまでのプロセスがあり，修正に長い時間がかかるために，ビルドの失敗が多いほど修正時間も長くなっていくと示唆している．
-また，図\ref{fig:3_docker-build-failer-ratio-period}，図\ref{fig:3_docker-build-fix-time-period}よりDockerのビルドが失敗する割合やその修正に要する時間は，時間の経過とともにどちらも増加する傾向があるということが示されている．
+失敗したビルドの修正時間については，中央値が44.2分であり，ビルドの失敗が頻繁に発生するプロジェクトでは，修正時間が長いという結果も示されている．この結果は従来のビルドプロセスよりも長い時間になっている．
+文献\cite{docker-failures}では，Dockerのビルドは他の言語と異なり，ビルド完了までのプロセスが長いために，修正に長い時間がかかりビルドの失敗が多いほど修正時間も長くなっていくと示唆している．
+また，図\ref{fig:3_docker-build-failer-ratio-period}，及び，図\ref{fig:3_docker-build-fix-time-period}よりDockerのビルドが失敗率やその修正時間は，時間の経過とともにどちらも増加する傾向があるということが示されている．
 
 % 先行研究\cite{3-ref-12}では，Dockerのビルドにかかる遅延時間が時間の経過とともに増加する傾向があることが確認されている．時間，負荷のかかるビルドは，失敗率を高める可能性があり，さらにRQ2で示されたように，より多くのビルドの失敗数と修正時間には相関があることが示されている．文献\cite{docker-failures}ではこれらの要因により，ビルド失敗率と修正時間が時間の経過とともに増加する可能性があると示唆している．
 
-文献\cite{docker-failures}より，Dockerにおいてビルドの失敗とその修正時間は時間の経過とともに長くなっていくことがわかり，その原因としてDockerにおける開発手法の知見が不足していることが考えられる．また同時に，Dockerfile内にビルドの失敗に関係するようなSATDコメントが含まれることが考えられ，SATDの返済について調査を行うことは，Dockerにおけるビルドの失敗や潜在するバグの問題を解決するのに有効であると考えられる．
+文献\cite{docker-failures}より，Dockerではビルドの失敗と修正に時間がかかることがわかり，その原因としてDockerにおける開発手法の知見が不足していることが考えられる．また同時に，Dockerfile内にビルドの失敗に関係するようなSATDが含まれることが考えられ，SATDの返済について調査を行うことは，Dockerにおけるビルドの失敗や潜在するバグの問題を解決するのに有効であると考えられる．

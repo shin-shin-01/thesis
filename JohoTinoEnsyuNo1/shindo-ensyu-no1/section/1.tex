@@ -21,17 +21,17 @@
 \begin{figure}[t]
     \centering
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis1/data-preprocess1.pdf}
-    \caption{データ処理工程}
+    \caption{データ処理工程 (出典：文献\cite{satd-removal})}
     \label{fig:1_data-preprocess}
 \end{figure}
 
-図\ref{fig:1_data-preprocess}にデータ処理の工程を示す．ExtracttingSourceCodeCommentでは，明らかに負債ではないライセンスコメントやIDEによる自動生成コメントを削除している．Applying NLP ではSATDのコメントを特定するために，Maldonadoら\cite{1-ref-25}の手法を用いている．NLP分類器は\cite{1-ref-25}によって提供されたデータを用いて訓練されたものを使用している．
+図\ref{fig:1_data-preprocess}にデータ処理の工程を示す．Extractting Source Code Commentでは，明らかに負債ではないライセンスコメントやIDEによる自動生成コメントを削除している．Applying NLP（Natural Language Processing） ではSATDのコメントを特定するために，Maldonadoら\cite{1-ref-25}の手法を用いている．NLP分類器は\cite{1-ref-25}によって提供されたデータを用いて訓練されたものを使用している．
 
-各工程後に取得したデータの詳細を表\ref{fig:1_data-table}，表\ref{fig:1_data-satd-table}に示す．
+各工程後に取得したデータの詳細を表\ref{fig:1_data-table}，及び，表\ref{fig:1_data-satd-table}に示す．
 
 \begin{table*}[t]
     \centering
-    \caption{調査対象プロジェクトの詳細}
+    \caption{調査対象プロジェクトの詳細 (出典：文献\cite{satd-removal})}
     \includegraphics[height=0.9\linewidth, angle=270]{./thesis1/data-table1.pdf}
     \label{fig:1_data-table}
 \end{table*}
@@ -53,7 +53,7 @@
 
 \begin{table}[t]
     \centering
-    \caption{調査対象プロジェクト内SATDの詳細}
+    \caption{調査対象プロジェクト内SATDの詳細 (出典：文献\cite{satd-removal})}
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis1/data-satd-table1.pdf}
     \label{fig:1_data-satd-table}
 \end{table}
@@ -61,8 +61,8 @@
 
 
 \subsection{結果}
-以前の研究では，SATDの検出，管理，影響について検討されてきたが，そのようなSATDの削除については，ほとんど知られていなかった．文献\cite{satd-removal}では，SATDの削除について調査を行なっており，
-その結果，SATDの大部分は削除され（平均74.4％），また大部分はSATDを導入した本人により削除され（平均54.4％），削除されるまでの期間は平均82～613.2日であることがわかっている．
+従来の研究では，SATDの検出，管理，影響について検討されてきたが，そのようなSATDの削除については，ほとんど知られていなかった．文献\cite{satd-removal}では，SATDの削除について調査を行なっており，
+その結果，SATDの大部分は削除され（プロジェクトごとの削除率，平均74.4％），また大部分はSATDを導入した本人により削除され（プロジェクトごとの自己削除率，平均54.4％），削除されるまでの期間は平均82～613.2日であることがわかっている．
 さらに14名の開発者を対象に，SATDの導入と削除の理由について調査を実施している．調査の結果，開発者はSATDを削除する必要性を認識しているにもかかわらず，SATDを削除するための正式なプロセスはなく，ほとんどの削除はバグ修正の一環として行われていることを発見している．したがって，文献\cite{satd-removal}では，プロジェクトが効果的かつ体系的にSATDに対処できるような技術が必要であるということが示唆されている．
 
 

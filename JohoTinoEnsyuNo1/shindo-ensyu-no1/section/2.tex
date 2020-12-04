@@ -17,7 +17,7 @@
 
 \begin{table}[t]
     \centering
-    \caption{データ詳細}
+    \caption{データ詳細 (出典：文献\cite{satd-real-removal})}
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis2/satd-attached-methods2.pdf}
     \label{fig:2_satd-attached-methods}
 \end{table}
@@ -31,7 +31,7 @@
 
 \begin{table}[t]
     \centering
-    \caption{SATD 削除フィルタリング結果}
+    \caption{SATD 削除フィルタリング結果 (出典:\cite{satd-real-removal})}
     \includegraphics[width=0.9\linewidth, angle=0]{./thesis2/satd-failer-alarm2.pdf}
     \label{fig:2_satd-failer-alarm}
 \end{table}
@@ -41,6 +41,6 @@
 \subsection{結果}
 文献\cite{satd-real-removal}では，SATDの削除とソースコードの変更との関係をより深く調査している．その結果，SATDの削除はクラス全体またはメソッド全体が削除された場合に 「偶発的（SATDの削除を目的とせず）」に発生していることが明らかになっている．さらに，SATDの削除がコミットメッセージに明言されているケースは，わずか8\%であり，SATDがどのように削除されるかについては，開発者は複雑な変更を行うだけでなく，メソッドの呼び出しや条件式を変更する傾向があるということが報告されている．
 
-文献\cite{satd-real-removal}では，これらの知見を利用して，SATD埋め込み時のの推奨事項の提供や，ボットへの組み込みを通して，SATDを解決するための提案を提供することができると示唆されている．
+文献\cite{satd-real-removal}では，これらの知見を利用して，SATD埋め込み時の推奨事項の提供や，自動アラートボットへの組み込みを通して，SATDを解決するための提案を提供することができると示唆されている．
 
 DockerにおいてもSATDの管理，解決のために，このような推奨事項の提供やボットの開発は有効であると考えられるため，調査を行うべきである．
